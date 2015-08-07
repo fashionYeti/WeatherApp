@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "WeatherViewController.h"
+#import "CityTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    UINavigationController *nc = [[UINavigationController alloc] init];
+    CityTableViewController *cityController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CityTableViewController"];
+    WeatherViewController *weatherController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"WeatherViewController"];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"CityChoosed"]) {  //App never launched
+        nc.viewControllers = @[cityController, weatherController];
+    } else {
+        nc.viewControllers = @[cityController];
+    }
+    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    self.window.rootViewController = nc;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
