@@ -33,7 +33,7 @@
     [mutableJSONString insertString:@"]" atIndex:[mutableJSONString length] - 1];
     jsonString = [NSString stringWithString:mutableJSONString];
     jsonString = [[mutableJSONString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
-    [jsonString stringByReplacingOccurrencesOfString:@"}{" withString:@"},{"];
+    jsonString = [jsonString stringByReplacingOccurrencesOfString:@"}{" withString:@"},{"];
 }
 
 - (void)didReceiveMemoryWarning {
