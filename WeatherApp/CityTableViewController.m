@@ -31,8 +31,9 @@
     NSMutableString *mutableJSONString = [NSMutableString stringWithString:jsonString];
     [mutableJSONString insertString:@"[" atIndex:0];
     [mutableJSONString insertString:@"]" atIndex:[mutableJSONString length] - 1];
-    NSLog(@"%@", jsonString);
-    
+    jsonString = [NSString stringWithString:mutableJSONString];
+    jsonString = [[mutableJSONString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
+    [jsonString stringByReplacingOccurrencesOfString:@"}{" withString:@"},{"];
 }
 
 - (void)didReceiveMemoryWarning {
